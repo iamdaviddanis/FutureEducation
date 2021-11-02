@@ -27,4 +27,9 @@ public class cameraController : MonoBehaviour
 
         parent.Rotate(Vector3.up, mouseX);
     }
+
+    public void ChangeMouseSensitivity(float _sensitivity)
+    {
+        mouseSensitivity = _sensitivity;
+    }
 }
