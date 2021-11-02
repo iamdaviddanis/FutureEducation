@@ -13,8 +13,10 @@ public class cameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
-    parent = transform.parent;
+        if (mouseSensitivity == 0) {
+            mouseSensitivity = 250;
+        }
+     parent = transform.parent;
     //    Cursor.lockState = CursorLockMode.Locked;
     }
 

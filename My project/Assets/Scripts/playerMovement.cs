@@ -15,7 +15,7 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private float groundCheckDistance;
     [SerializeField] private LayerMask groundMask;
     [SerializeField] private float gravity;
-
+   
 
     [SerializeField] private float jumpHeight;
 
@@ -28,6 +28,7 @@ public class playerMovement : MonoBehaviour
     
     private void Update()
     {
+      
         Move();
     }
 
