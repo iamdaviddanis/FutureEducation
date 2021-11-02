@@ -56,12 +56,13 @@
     <Compile Include="Assets\Scripts\idk.cs" />
     <Compile Include="Assets\Scripts\cameraController.cs" />
     <Compile Include="Assets\Scripts\camera_main.cs" />
+    <Compile Include="Assets\AudioManager.cs" />
     <Compile Include="Assets\MainMenu.cs" />
     <Compile Include="Assets\Scripts\cam.cs" />
     <Compile Include="Assets\Scripts\playerMovement.cs" />
     <Compile Include="Assets\Scripts\bruh.cs" />
     <Compile Include="Assets\Scripts\player_script.cs" />
-    <Compile Include="Assets\AudioManager.cs" />
+    <Compile Include="Assets\PauseMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -5,20 +5,24 @@ using UnityEngine;
 public class cameraController : MonoBehaviour
 {
 
-    [SerializeField] private float mouseSensitivity;
+    // [SerializeField] public float mouseSensitivity;
+    public static float mouseSensitivity;
+
 
     private Transform parent;
     // Start is called before the first frame update
     void Start()
     {
-        parent = transform.parent;
-        Cursor.lockState = CursorLockMode.Locked;
+       
+    parent = transform.parent;
+    //    Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
         Rotate();
+     
     }
 
     private void Rotate()
@@ -31,5 +35,7 @@ public class cameraController : MonoBehaviour
     public void ChangeMouseSensitivity(float _sensitivity)
     {
         mouseSensitivity = _sensitivity;
+        Debug.Log(mouseSensitivity);
+       
     }
 }

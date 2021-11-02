@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
 
         private void Start()
     {
+        
         volumeSliders[0].value = AudioManager.instance.masterVolumePercent;
         volumeSliders[1].value = AudioManager.instance.musicVolumePercent;
         volumeSliders[2].value = AudioManager.instance.sfxVolumePercent;
