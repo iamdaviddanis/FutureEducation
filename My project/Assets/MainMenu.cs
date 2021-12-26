@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using System;
 
 public class MainMenu : MonoBehaviour
 {
 
     public Slider[] volumeSliders;
+    public static string code = "defaultQuestions";
+    public InputField iField;
+    public String odpoved;
 
-    
 
     private void Start()
     {
@@ -18,12 +20,37 @@ public class MainMenu : MonoBehaviour
         volumeSliders[0].value = AudioManager.instance.masterVolumePercent;
         volumeSliders[1].value = AudioManager.instance.musicVolumePercent;
         volumeSliders[2].value = AudioManager.instance.sfxVolumePercent;
+ 
 
     }
 
     public void NewGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
+    public void OkGame()
+    {
+        odpoved = iField.text;
+        Debug.Log(MainMenu.code);
+        code = odpoved;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void CustomGame()
+    {
+        odpoved = iField.text;
+        SceneManager.LoadScene("CustomMenu");
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Debug.Log(MainMenu.code);
+            code = odpoved;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+
+            
+        }
+
+
 
     public void GoToSettingsMenu()
     {
@@ -56,8 +83,7 @@ public class MainMenu : MonoBehaviour
 
     public void OpenQuizCreator()
     {
-        Application.OpenURL("https://www.google.sk/");
-        Debug.Log("zatial odkaz na google");
+        Application.OpenURL("https://hopesoft.eu/last-city/");
     }
 
 
