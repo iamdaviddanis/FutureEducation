@@ -39,6 +39,8 @@ public class xd : StateMachineBehaviour
             else if(stav == - 777)
             {
                  int random=Random.Range(-2,-4);
+                 if(random != - 2)
+                    animator.SetBool("res",false);
                  Debug.Log("NAHOAD + "+random);
                 animator.SetInteger("status",random);  
 

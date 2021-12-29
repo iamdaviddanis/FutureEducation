@@ -6,7 +6,8 @@ public class enemy_main : MonoBehaviour
 {
     public Animator animator;
     public CharacterController controller;
-    public Transform target;
+    private Transform target;
+   
 
     private int hp;
     private int status;
@@ -15,7 +16,20 @@ public class enemy_main : MonoBehaviour
 
 
     public Collider collider;
-    
+    private GameObject player;
+    private float gravity=-9.8f;
+
+
+    private bool fresh=true;
+
+    public bool zijes()
+    {
+        if(zije==true && animator.GetBool("res") == true)
+            return true;
+        else if(zije == false && animator.GetBool("res") == true)
+            return true;
+        return false;
+    }
 
     void ragdoll(bool v)
     {
@@ -47,17 +61,45 @@ public class enemy_main : MonoBehaviour
 
     void Start()
     {
+
+        tag="enemy";
+
         hp=100;
-        animator.SetInteger("status",0); 
+        animator.SetInteger("status",1); 
+        animator.SetBool("res",true); 
         animator.SetInteger("hp",100); 
         ragdoll(true);
         Debug.Log("OK");
 
     }
 
+    public void set_target(Transform vstup)
+    {
+        target=vstup;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Vector3 pohyb=new Vector3(0.0f,0.0f,0.0f);
+        if(controller.isGrounded)
+        {
+            if(fresh)
+            {
+                animator.SetInteger("status",50); 
+                fresh=false;
+            }
+            pohyb.y=0;
+        }
+           
+        else
+        {
+            pohyb.y=gravity;
+        }
+            
+        controller.Move(pohyb*3.0f*Time.deltaTime);
+
+
         if(Input.GetKey("p"))
         {
              ragdoll(false);
@@ -106,7 +148,6 @@ public class enemy_main : MonoBehaviour
                 }
             }
            
-
         }
 
 
@@ -121,7 +162,6 @@ public class enemy_main : MonoBehaviour
         float rot_speed = 8.0f * Time.deltaTime;
         look_smer = Vector3.RotateTowards(transform.forward, smer, rot_speed, 0.0f);
       
-
         if(uhol < 45.0f )
         {
             return true;
@@ -136,8 +176,13 @@ public class enemy_main : MonoBehaviour
         {
             animator.SetInteger("hp",hp-vstup); 
             animator.SetInteger("status",9); 
+
+            player=GameObject.FindWithTag("player");
+             set_target(player.transform);
+
+            
         }
-      
+       
     }
 
 

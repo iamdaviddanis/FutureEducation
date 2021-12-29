@@ -28,6 +28,12 @@ public class QuestionScript : MonoBehaviour
     public String CheckAnswerA, CheckAnswerB, CheckAnswerC, CheckAnswerD, QuestionCount, odpoved;
     public InputField iField;
 
+
+
+    //neche sa  mi to studovat -1 nie 0 nespravne 1 sprave
+    private short odpovedal=-1;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,87 +50,117 @@ public class QuestionScript : MonoBehaviour
 
        //  StartCoroutine(LoadImage("https://i.pinimg.com/236x/ab/9e/74/ab9e740d9285ac0122acb96a82621899.jpg")); //Fetch file from the link
 
-       
-
-
 
     }
 
     void OdpovedStatus(int A, int B, int C, int D,string odpoved)
     {
-        odpoved = iField.text;
-        int good = 0;
-        int bad = 0;
-        Debug.Log(odpoved);
-        ResponseText.enabled = true;
-        AnswerStatus.enabled = true;
-        Debug.Log(Definition.text);
-        if (Definition.text !="New Text")
+        
         {
-            DefinitionText.enabled = true;
-            Definition.enabled = true;
+            odpoved = iField.text;
+            int good = 0;
+            int bad = 0;
+            Debug.Log(odpoved);
+            ResponseText.enabled = true;
+            AnswerStatus.enabled = true;
+            Debug.Log(Definition.text);
+            if (Definition.text !="New Text")
+            {
+                DefinitionText.enabled = true;
+                Definition.enabled = true;
+            }
+        
+        
+            if (odpoved.Contains("A") && A == 1)
+            {
+                good++;
+            }
+            else if (odpoved.Contains("A") && A == 0)
+            {
+                bad++;
+            }
+            if (odpoved.Contains("B") && B == 1)
+            {
+                good++;
+            }
+            else if (odpoved.Contains("B") && B == 0)
+            {
+                bad++;
+            }
+            if (odpoved.Contains("C") && C == 1)
+            {
+                good++;
+            }
+            else if (odpoved.Contains("C") && C == 0)
+            {
+                bad++;
+            }
+            if (odpoved.Contains("D") && D == 1)
+            {
+                good++;
+            }
+            else if (odpoved.Contains("D") && D == 0)
+            {
+                bad++;
+            }
+            Debug.Log(bad.ToString() + " " + good.ToString());
+
+
+            if (bad==0 && good>0)
+            {
+                Debug.Log(bad + " " + good);
+                AnswerStatus.text = "Sprï¿½vna odpoveï¿½!";
+                AnswerStatus.color = Color.green;
+                ResponseText.color = Color.green;
+                DefinitionText.color = Color.green;
+                Definition.color = Color.green;
+                scoreCounter++;
+                Score.text = scoreCounter.ToString();
+
+                //nechce sa mi to studovat
+                
+                odpovedal=1;
+                QuestionMenu.SetActive(false);
+            
+            }
+            else {
+                AnswerStatus.text = "Nesprï¿½vna odpoveï¿½!";
+                AnswerStatus.color = Color.red;
+                ResponseText.color = Color.red;
+                DefinitionText.color = Color.red;
+                Definition.color = Color.red;
+
+                
+                //nechce sa mi to studovat
+                
+                 odpovedal=0;
+                 QuestionMenu.SetActive(false);
+            
+            }
         }
-       
      
-        if (odpoved.Contains("A") && A == 1)
-        {
-            good++;
-        }
-        else if (odpoved.Contains("A") && A == 0)
-        {
-            bad++;
-        }
-        if (odpoved.Contains("B") && B == 1)
-        {
-            good++;
-        }
-        else if (odpoved.Contains("B") && B == 0)
-        {
-            bad++;
-        }
-        if (odpoved.Contains("C") && C == 1)
-        {
-            good++;
-        }
-        else if (odpoved.Contains("C") && C == 0)
-        {
-            bad++;
-        }
-        if (odpoved.Contains("D") && D == 1)
-        {
-            good++;
-        }
-        else if (odpoved.Contains("D") && D == 0)
-        {
-            bad++;
-        }
-        Debug.Log(bad.ToString() + " " + good.ToString());
-
-
-        if (bad==0 && good>0)
-        {
-            Debug.Log(bad + " " + good);
-            AnswerStatus.text = "Správna odpoveï!";
-            AnswerStatus.color = Color.green;
-            ResponseText.color = Color.green;
-            DefinitionText.color = Color.green;
-            Definition.color = Color.green;
-            scoreCounter++;
-            Score.text = scoreCounter.ToString();
-           
-        }
-        else {
-            AnswerStatus.text = "Nesprávna odpoveï!";
-            AnswerStatus.color = Color.red;
-            ResponseText.color = Color.red;
-            DefinitionText.color = Color.red;
-            Definition.color = Color.red;
-
-        };
-
         // Time.timeScale = 0f;
 
     }
+
+    public int get_odpoved()
+    {
+        return odpovedal;
+    }
+
+    public void reset()
+    {
+        DefinitionText.enabled = false;
+        Definition.enabled = false;
+        ResponseText.enabled = false;
+        AnswerStatus.enabled = false;
+
+
+        odpovedal=-1;
+        QuestionMenu.SetActive(true);
+    }
+
+  
 
     public IEnumerator DelayTime()
     {
@@ -209,47 +245,46 @@ public class QuestionScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(odpovedal==-1)
+        {
+             if (Input.GetKeyDown(KeyCode.Return))
+            {
+                iField.DeactivateInputField();
+                OdpovedStatus(Int32.Parse(CheckAnswerA), Int32.Parse(CheckAnswerB), Int32.Parse(CheckAnswerC), Int32.Parse(CheckAnswerD),odpoved);
+            }
+            if (cntdnw > 0)
+            {
+                cntdnw -= Time.deltaTime;
+            }
+            double b = System.Math.Round(cntdnw, 0);
+            disvar.text = b.ToString();
+            if (cntdnw < 0)
+            {
+                Debug.Log("Completed");
+            }
+
+            timer += Time.deltaTime;
+
         
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            iField.DeactivateInputField();
-            OdpovedStatus(Int32.Parse(CheckAnswerA), Int32.Parse(CheckAnswerB), Int32.Parse(CheckAnswerC), Int32.Parse(CheckAnswerD),odpoved);
-        }
-        if (cntdnw > 0)
-        {
-            cntdnw -= Time.deltaTime;
-        }
-        double b = System.Math.Round(cntdnw, 0);
-        disvar.text = b.ToString();
-        if (cntdnw < 0)
-        {
-            Debug.Log("Completed");
-        }
+            if ( timer > 10)
+            {
+                DefinitionText.enabled = false;
+                Definition.enabled = false;
+                ResponseText.enabled = false;
+                AnswerStatus.enabled = false;
 
-        timer += Time.deltaTime;
-
-      
-
-        
-
-        if ( timer > 10)
-        {
-            DefinitionText.enabled = false;
-            Definition.enabled = false;
-            ResponseText.enabled = false;
-            AnswerStatus.enabled = false;
-
-           
-
-            loadData();
-            counter++;
-            Count_correct = 0;
-            timer = 0;
-            ImageText.enabled = false;
             
-            iField.Select();
-            iField.ActivateInputField();
+                loadData();
+                counter++;
+                Count_correct = 0;
+                timer = 0;
+                ImageText.enabled = false;
+                
+                iField.Select();
+                iField.ActivateInputField();
+            }
+            
         }
-        
     }
+       
 }

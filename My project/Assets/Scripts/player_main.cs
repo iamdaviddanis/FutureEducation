@@ -18,12 +18,22 @@ public class player_main : MonoBehaviour
     private bool hybe_sa=false;
     private bool mier=false;
 
+
+    private int hp=100;
+    private bool zije=true;
+
     public Texture2D cross_hair;
     void OnGUI()
     {
-        GUI.Label(new Rect(5,0,80,20),"CMONBRUH");
+        GUI.Label(new Rect(5,0,80,20),"HP " + hp);
+        if(!zije)
+        {
+             GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
+        }
         if(mier)
             GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
+
+       
 
     }
 
@@ -33,7 +43,7 @@ public class player_main : MonoBehaviour
         {
             bone_rot+= Input.GetAxis("Mouse Y") * 2.0f;
 
-           /* if(bone_rot >= 15)
+           /* if(bone_rot >= 15)s
                 bone_rot=15;
             else if(bone_rot <= - 25)
                 bone_rot=-25;  */         
@@ -49,6 +59,12 @@ public class player_main : MonoBehaviour
     }
 
 
+    public void hit(int vstup)
+    {
+        hp-=vstup;
+    }
+
+
     public bool mierim()
     {
         return mier;
@@ -57,27 +73,36 @@ public class player_main : MonoBehaviour
     void Start()
     {
         camera_script = camera.GetComponent<player_camera>();
+        ragdoll(true);
     }
 
     void Update()
     {
+        if(zije)
+        {
+            if(hp <=0)
+            {
+                 zije=false;
+                 ragdoll(false);
+            }
+               
 
+             animator.SetInteger("status",0);      
+            Vector3 pohyb=new Vector3(0.0f,0.0f,0.0f);
+            if(controller.isGrounded)
+                pohyb.y=0;
+            else
+                pohyb.y=gravity;
+
+            if(mier)
+                camera_script.prepni(false);
+            else
+                camera_script.prepni(true);
+            controls();
+            //mozem_pohyb=rotuj_na_smer();
+            controller.Move(pohyb*3.0f*Time.deltaTime);
+        }
        
-
-        animator.SetInteger("status",0);      
-        Vector3 pohyb=new Vector3(0.0f,0.0f,0.0f);
-        if(controller.isGrounded)
-            pohyb.y=0;
-        else
-            pohyb.y=gravity;
-
-        if(mier)
-            camera_script.prepni(false);
-        else
-            camera_script.prepni(true);
-        controls();
-        //mozem_pohyb=rotuj_na_smer();
-        controller.Move(pohyb*3.0f*Time.deltaTime);
     }
 
     void controls()
@@ -168,4 +193,22 @@ public class player_main : MonoBehaviour
         }
     }
     
+
+     void ragdoll(bool v)
+    {
+        controller.enabled=v;
+        animator.enabled=v;
+        Rigidbody [] bodies=GetComponentsInChildren<Rigidbody>();
+        foreach(Rigidbody body in bodies)
+        {
+            body.isKinematic=v;
+            body.velocity=Vector3.zero;
+            body.angularVelocity=Vector3.zero;
+        }
+        
+       // controller.collider.enabled=v;
+        
+        
+    }
+
 }
