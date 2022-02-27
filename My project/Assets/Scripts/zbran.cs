@@ -36,12 +36,13 @@ public class zbran : MonoBehaviour
         Debug.DrawRay(ray.origin,ray.direction*1000,Color.black);
         */
 
-        if(Input.GetMouseButton(0) && player_script.mierim())
+        if(Input.GetMouseButton(0) && player_script.mierim() && player_script.mam_ammo())
         {
             if(Time.time > cas)
             {
-                cas=Time.time+speed_rate;
+                cas=Time.time+0.5f;
                 strielaj();
+                player_script.minus_ammo(1);
             }
         }
     }

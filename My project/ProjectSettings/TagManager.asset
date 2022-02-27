@@ -4,13 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - enemy
   - player
+  - drop
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - drop
   - Water
   - UI
   - Ground

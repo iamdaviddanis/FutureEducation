@@ -51,6 +51,7 @@
      <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\ShotBehavior.cs" />
      <Compile Include="Assets\Scripts\player_camera.cs" />
      <Compile Include="Assets\Scripts\player_main.cs" />
+     <Compile Include="Assets\enemy_attack.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineVertexData.cs" />
      <Compile Include="Assets\PauseMenu.cs" />
      <Compile Include="Assets\Scripts\GUI_XD.cs" />
@@ -66,6 +67,7 @@
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineStripBehavior.cs" />
      <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\VolumetricMultiLineBehavior.cs" />
      <Compile Include="Assets\Scripts\playerMovement.cs" />
+     <Compile Include="Assets\Scripts\spawner.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\VolumetricLines\BuiltInRenderPipeline\Shaders\_LineStripShader.cginc" />

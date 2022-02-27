@@ -23,9 +23,17 @@ public class player_main : MonoBehaviour
     private bool zije=true;
 
     public Texture2D cross_hair;
+
+
+    private float bone_rot_cover=0.0f;
+
+
+    private int ammo=100;
+  
     void OnGUI()
     {
         GUI.Label(new Rect(5,0,80,20),"HP " + hp);
+        GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
         if(!zije)
         {
              GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
@@ -33,7 +41,7 @@ public class player_main : MonoBehaviour
         if(mier)
             GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
 
-       
+
 
     }
 
@@ -43,6 +51,11 @@ public class player_main : MonoBehaviour
         {
             bone_rot+= Input.GetAxis("Mouse Y") * 2.0f;
 
+             if(Input.GetKey("q"))
+             {
+                bone_rot_cover=45.0f;
+             }
+
            /* if(bone_rot >= 15)s
                 bone_rot=15;
             else if(bone_rot <= - 25)
@@ -51,10 +64,11 @@ public class player_main : MonoBehaviour
         else
         {
             bone_rot=0;
+            bone_rot_cover=0;
         }
         //Debug.Log(bone_rot);
         camera_script.set_extra_rot(-bone_rot);
-        bone.localRotation = Quaternion.Euler(-bone_rot*1.8f, 0, 0);
+        bone.localRotation = Quaternion.Euler(-bone_rot*1.8f,0, 0);
            
     }
 
@@ -68,6 +82,17 @@ public class player_main : MonoBehaviour
     public bool mierim()
     {
         return mier;
+    }
+
+    public bool mam_ammo()
+    {
+        if(ammo > 0)
+            return true;
+        return false;
+    }
+    public void minus_ammo(int v)
+    {
+        ammo-=v;
     }
 
     void Start()
@@ -209,6 +234,15 @@ public class player_main : MonoBehaviour
        // controller.collider.enabled=v;
         
         
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+          if (collision.gameObject.tag == "drop")
+          {
+              ammo+=10;
+              GameObject.Destroy(collision.gameObject);
+          }
     }
 
 }
