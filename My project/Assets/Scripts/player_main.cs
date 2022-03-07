@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player_main : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class player_main : MonoBehaviour
     private bool mier=false;
 
 
-    private int hp=100;
+    public int hp=100;
     private bool zije=true;
 
     public Texture2D cross_hair;
@@ -29,7 +30,9 @@ public class player_main : MonoBehaviour
 
 
     private int ammo=100;
-  
+
+   
+
     void OnGUI()
     {
         GUI.Label(new Rect(5,0,80,20),"HP " + hp);
@@ -99,10 +102,13 @@ public class player_main : MonoBehaviour
     {
         camera_script = camera.GetComponent<player_camera>();
         ragdoll(true);
+       
     }
 
     void Update()
     {
+       
+
         if(zije)
         {
             if(hp <=0)
