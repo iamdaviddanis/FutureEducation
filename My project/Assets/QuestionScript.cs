@@ -9,6 +9,7 @@ using System;
 using UnityEngine.Networking;
 using Firebase.Storage;
 using Firebase.Extensions;
+using System.Windows;
 
 public class QuestionScript : MonoBehaviour
 {
@@ -17,36 +18,40 @@ public class QuestionScript : MonoBehaviour
     StorageReference storageReference;
     float cntdnw;
     int Count_correct;
-    public Text disvar;
     float timer = 0;
+    public double b = 60;
     public static int scoreCounter;
     public static int counter;
     DatabaseReference reference;
     public static bool isPaused;
     public GameObject QuestionMenu;
-    public Text Load, AnswerA, AnswerB, AnswerC, AnswerD, AnswerStatus, Score, Number_correct, count_question, Definition, DefinitionText, ResponseText,ImageText;
+    public Text Load,  AnswerB, AnswerC, AnswerD, AnswerStatus, Score, Number_correct, count_question, Definition, ImageText;
     public String CheckAnswerA, CheckAnswerB, CheckAnswerC, CheckAnswerD, QuestionCount, odpoved;
-    public InputField iField;
     public Text Spravne, Nespravne;
     public int nespravneCislo = 0;
+    public Text AnswerA;
+
+    public Button AnswerAbtn, AnswerBbtn, AnswerCbtn, AnswerDbtn;
 
 
 
     //neche sa  mi to studovat -1 nie 0 nespravne 1 sprave
     private short odpovedal=-1;
-
+   
 
     // Start is called before the first frame update
     void Start()
     {
+        AnswerAbtn.onClick.AddListener(() => ButtonClicked(1));
+        AnswerBbtn.onClick.AddListener(() => ButtonClicked(2));
+        AnswerCbtn.onClick.AddListener(() => ButtonClicked(3));
+        AnswerDbtn.onClick.AddListener(() => ButtonClicked(4));
+       
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         counter = 0;
         scoreCounter = 0;
         QuestionMenu.SetActive(false);
         Definition.enabled = false;
-        DefinitionText.enabled = false;
-        ResponseText.enabled = false;
-        AnswerStatus.enabled = false;
         ImageText.enabled = false;
         Debug.Log(MainMenu.code);
 
@@ -59,16 +64,15 @@ public class QuestionScript : MonoBehaviour
     {
         
         {
-            odpoved = iField.text;
+
             int good = 0;
             int bad = 0;
             Debug.Log(odpoved);
-            ResponseText.enabled = true;
-            AnswerStatus.enabled = true;
+          
             Debug.Log(Definition.text);
             if (Definition.text !="New Text")
             {
-                DefinitionText.enabled = true;
+
                 Definition.enabled = true;
             }
         
@@ -112,9 +116,7 @@ public class QuestionScript : MonoBehaviour
             {
                 Debug.Log(bad + " " + good);
                 AnswerStatus.text = "Spr�vna odpove�!";
-                AnswerStatus.color = Color.green;
-                ResponseText.color = Color.green;
-                DefinitionText.color = Color.green;
+                AnswerStatus.color = Color.green;          
                 Definition.color = Color.green;
                 scoreCounter++;
                 Score.text = scoreCounter.ToString();
@@ -139,8 +141,7 @@ public class QuestionScript : MonoBehaviour
             else {
                 AnswerStatus.text = "Nespr�vna odpove�!";
                 AnswerStatus.color = Color.red;
-                ResponseText.color = Color.red;
-                DefinitionText.color = Color.red;
+
                 Definition.color = Color.red;
                 //  GUI.Label(new Rect(5, 20, 80, 100), "ZLA ODPOVED");
                 nespravneCislo++;
@@ -166,9 +167,9 @@ public class QuestionScript : MonoBehaviour
 
     public void reset()
     {
-        DefinitionText.enabled = false;
+        
         Definition.enabled = false;
-        ResponseText.enabled = false;
+   
         AnswerStatus.enabled = false;
 
 
@@ -187,8 +188,7 @@ public class QuestionScript : MonoBehaviour
     public void loadData() {
         FirebaseDatabase.DefaultInstance.GetReference(MainMenu.code).ValueChanged += QuestionScript_ValueChanged;
         QuestionMenu.SetActive(true);
-        iField.Select();
-        iField.text = "";
+
         // Time.timeScale = 0f;
     }
 
@@ -215,8 +215,17 @@ public class QuestionScript : MonoBehaviour
                 // setting the loaded image to our object
             }
        
-    }     
-    
+    }
+
+    void ButtonClicked(int buttonNo)
+    {
+        if (CheckAnswerA=="1" && buttonNo ==1) {
+            AnswerAbtn.GetComponent<Image>().sprite = Resources.Load<Sprite>("Assets/grafika/Rectangle 10.png");
+        }
+        //Output this to console when the Button3 is clicked
+        Debug.Log("Button clicked = " + buttonNo);
+    }
+
 
 
     private void QuestionScript_ValueChanged(object sender, ValueChangedEventArgs e)
@@ -253,8 +262,8 @@ public class QuestionScript : MonoBehaviour
         Counter_Correct_Answers(Int32.Parse(CheckAnswerB));
         Counter_Correct_Answers(Int32.Parse(CheckAnswerC));
         Counter_Correct_Answers(Int32.Parse(CheckAnswerD));
-        Number_correct.text = Count_correct.ToString();
-        count_question.text = counter.ToString() + "_" + QuestionCount;
+      //  Number_correct.text = Count_correct.ToString();
+        count_question.text = "Otázka "+counter.ToString() + " / " + QuestionCount;
         Debug.Log("Load Success" + counter.ToString());
     }
 
@@ -265,15 +274,17 @@ public class QuestionScript : MonoBehaviour
         {
              if (Input.GetKeyDown(KeyCode.Return))
             {
-                iField.DeactivateInputField();
                 OdpovedStatus(Int32.Parse(CheckAnswerA), Int32.Parse(CheckAnswerB), Int32.Parse(CheckAnswerC), Int32.Parse(CheckAnswerD),odpoved);
             }
             if (cntdnw > 0)
             {
                 cntdnw -= Time.deltaTime;
             }
-            double b = System.Math.Round(cntdnw, 0);
-            disvar.text = b.ToString();
+
+           
+                 b = System.Math.Round(cntdnw, 0);
+             
+            
             if (cntdnw < 0)
             {
                 Debug.Log("Completed");
@@ -284,10 +295,10 @@ public class QuestionScript : MonoBehaviour
         
             if ( timer > 10)
             {
-                DefinitionText.enabled = false;
+                
                 Definition.enabled = false;
-                ResponseText.enabled = false;
-                AnswerStatus.enabled = false;
+              
+             
 
             
                 loadData();
@@ -296,8 +307,7 @@ public class QuestionScript : MonoBehaviour
                 timer = 0;
                 ImageText.enabled = false;
                 
-                iField.Select();
-                iField.ActivateInputField();
+       
             }
             
         }
