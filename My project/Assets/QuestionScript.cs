@@ -27,6 +27,8 @@ public class QuestionScript : MonoBehaviour
     public Text Load, AnswerA, AnswerB, AnswerC, AnswerD, AnswerStatus, Score, Number_correct, count_question, Definition, DefinitionText, ResponseText,ImageText;
     public String CheckAnswerA, CheckAnswerB, CheckAnswerC, CheckAnswerD, QuestionCount, odpoved;
     public InputField iField;
+    public Text Spravne, Nespravne;
+    public int nespravneCislo = 0;
 
 
 
@@ -117,9 +119,20 @@ public class QuestionScript : MonoBehaviour
                 scoreCounter++;
                 Score.text = scoreCounter.ToString();
 
-                //nechce sa mi to studovat
+
+
+
+
+
+                //GUI.Label(new Rect(5, 20, 80, 100), "DOBRA ODPOVED");
+              
+                    Spravne.text = scoreCounter.ToString();
+
                 
-                odpovedal=1;
+
+                //nechce sa mi to studovat
+
+                odpovedal =1;
                 QuestionMenu.SetActive(false);
             
             }
@@ -129,11 +142,14 @@ public class QuestionScript : MonoBehaviour
                 ResponseText.color = Color.red;
                 DefinitionText.color = Color.red;
                 Definition.color = Color.red;
+                //  GUI.Label(new Rect(5, 20, 80, 100), "ZLA ODPOVED");
+                nespravneCislo++;
+                Nespravne.text = nespravneCislo.ToString();
 
-                
+
                 //nechce sa mi to studovat
-                
-                 odpovedal=0;
+
+                odpovedal =0;
                  QuestionMenu.SetActive(false);
             
             }

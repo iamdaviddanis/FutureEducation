@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player_main : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class player_main : MonoBehaviour
     private bool mier=false;
 
 
-    private int hp=100;
+    public int hp=100;
     private bool zije=true;
 
     public Texture2D cross_hair;
@@ -28,12 +29,14 @@ public class player_main : MonoBehaviour
     private float bone_rot_cover=0.0f;
 
 
-    private int ammo=100;
-  
+    public int ammo=100;
+
+   
+
     void OnGUI()
     {
-        GUI.Label(new Rect(5,0,80,20),"HP " + hp);
-        GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
+        //GUI.Label(new Rect(5,0,80,20),"HP " + hp);
+        //GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
         if(!zije)
         {
              GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
@@ -99,10 +102,13 @@ public class player_main : MonoBehaviour
     {
         camera_script = camera.GetComponent<player_camera>();
         ragdoll(true);
+       
     }
 
     void Update()
     {
+       
+
         if(zije)
         {
             if(hp <=0)
