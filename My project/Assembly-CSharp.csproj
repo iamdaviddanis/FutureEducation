@@ -64,6 +64,7 @@
     <Compile Include="Assets\xd.cs" />
     <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CannonBehavior.cs" />
     <Compile Include="Assets\Scripts\player.cs" />
+    <Compile Include="Assets\HealthBarScript.cs" />
     <Compile Include="Assets\Scripts\enemy_main.cs" />
     <Compile Include="Assets\Minimap.cs" />
     <Compile Include="Assets\EnemyAiTutorial.cs" />
@@ -78,7 +79,7 @@
     <Compile Include="Assets\Scripts\AmmoBox.cs" />
     <Compile Include="Assets\Scripts\spawner.cs" />
     <Compile Include="Assets\Scripts\Dron.cs" />
-    <Compile Include="Assets\HealthBarScript.cs" />
+    <Compile Include="Assets\AmmoNumber.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

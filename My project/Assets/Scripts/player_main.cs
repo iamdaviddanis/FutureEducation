@@ -29,14 +29,14 @@ public class player_main : MonoBehaviour
     private float bone_rot_cover=0.0f;
 
 
-    private int ammo=100;
+    public int ammo=100;
 
    
 
     void OnGUI()
     {
-        GUI.Label(new Rect(5,0,80,20),"HP " + hp);
-        GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
+        //GUI.Label(new Rect(5,0,80,20),"HP " + hp);
+        //GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
         if(!zije)
         {
              GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");

@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class HealthBarScript : MonoBehaviour
 {
     private Image HealthBar;
-    public float CurrentHealth;
-    private float MaxHealth = 100f;
+   // public float CurrentHealth;
+    //private float MaxHealth = 100f;
     player_main player;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +19,8 @@ public class HealthBarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CurrentHealth = player.hp;
-        HealthBar.fillAmount = CurrentHealth / MaxHealth;
+        //CurrentHealth = player.hp;
+        if (HealthBar != null)
+            HealthBar.fillAmount = player.hp / 100f;
     }
 }
