@@ -20,7 +20,7 @@ public class player_camera : MonoBehaviour
     private Vector3 target_final;
 
 
-    public bool main=true;
+    public int main=0;
 
 
     private float zaloha_v=0;
@@ -30,6 +30,18 @@ public class player_camera : MonoBehaviour
 
 
     private float rot_extra_x=0;
+
+
+
+
+    private float otazka_position_x=0;
+    private float otazka_position_y=3.73f;
+    private float otazka_position_z=0.1f;
+
+    private float otazka_rotation_x=35.43f;
+    private float otazka_rotation_y=0f;
+    private float otazka_rotation_z=0f;
+
 
     void Start()
     {
@@ -44,10 +56,15 @@ public class player_camera : MonoBehaviour
 
     void Update()
     {
-        if(main)
+        
+        
+        if(main == 0)
             hlavna_camera();
-        else
+        else if(main == 1)
             sekundarna_camera();
+         else
+            camera_otazka();
+        
     }
 
     void sekundarna_camera()
@@ -119,11 +136,11 @@ public class player_camera : MonoBehaviour
         
     }
 
-    public void prepni(bool status)
+    public void prepni(int status)
     {
         if(status==main)
             return;
-        if(!status)
+        if(status==0)
         {
             zaloha_h=h;
             zaloha_v=v;
@@ -136,6 +153,24 @@ public class player_camera : MonoBehaviour
         main=status;
     }
 
+
+    void camera_otazka()
+    {
+        transform.parent=target.transform;
+
+       position.x=otazka_position_x;
+       position.y=otazka_position_y;
+       position.z=otazka_position_z;
+
+       rotation.x=otazka_rotation_x;
+       rotation.y=otazka_rotation_y;
+       rotation.z=otazka_rotation_z;
+
+        transform.localPosition=position;
+        transform.localEulerAngles=rotation; 
+
+
+    }
 
 
 }

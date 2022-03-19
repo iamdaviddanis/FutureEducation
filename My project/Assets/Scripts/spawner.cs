@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class spawner : MonoBehaviour
 {
@@ -15,33 +14,19 @@ public class spawner : MonoBehaviour
 
     private bool can_spawn=true;
     private int pocet=2;
-    public Text Spravne,Nespravne;
+    
 
-    public int spravneCislo = 0;
-    public int nespravneCislo = 0;
 
     public GameObject[] enemies;
 
     void OnGUI()
     {
-        if (otazky_script.get_odpoved() == -1)
-        {//   GUI.Label(new Rect(5, 20, 80, 20), "ODPOVEDAJ");
-       
-        }
-        else if (otazky_script.get_odpoved() == 0)
-        {
-            //  GUI.Label(new Rect(5, 20, 80, 100), "ZLA ODPOVED");
-          
-            
-
-        }
+        if(otazky_script.get_odpoved()==-1)
+            GUI.Label(new Rect(5,20,80,20),"ODPOVEDAJ");
+        else if(otazky_script.get_odpoved()==0)
+            GUI.Label(new Rect(5,20,80,100),"ZLA ODPOVED");
         else
-        {
-            //GUI.Label(new Rect(5, 20, 80, 100), "DOBRA ODPOVED");
-          
-
-        }
-           
+            GUI.Label(new Rect(5,20,80,100),"DOBRA ODPOVED");
     }
     void Start()
     {

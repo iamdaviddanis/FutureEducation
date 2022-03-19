@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class player_main : MonoBehaviour
 {
     public CharacterController controller;
     public Animator animator;
     public Transform bone;
+    public Transform ruka_ik;
+
 
     public GameObject camera;
     private player_camera camera_script;
@@ -30,13 +31,18 @@ public class player_main : MonoBehaviour
 
 
     public int ammo=100;
+    private bool can_mier=true;
 
-   
+    public MeshRenderer zbran_model;
+    public MeshRenderer tablet_model;
 
+    
+    
+  
     void OnGUI()
     {
-        //GUI.Label(new Rect(5,0,80,20),"HP " + hp);
-        //GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
+        GUI.Label(new Rect(5,0,80,20),"HP " + hp);
+        GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
         if(!zije)
         {
              GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
@@ -101,14 +107,12 @@ public class player_main : MonoBehaviour
     void Start()
     {
         camera_script = camera.GetComponent<player_camera>();
+      
         ragdoll(true);
-       
     }
 
     void Update()
     {
-       
-
         if(zije)
         {
             if(hp <=0)
@@ -125,10 +129,14 @@ public class player_main : MonoBehaviour
             else
                 pohyb.y=gravity;
 
-            if(mier)
-                camera_script.prepni(false);
-            else
-                camera_script.prepni(true);
+            if(can_mier)
+            {
+                if(mier)
+                    camera_script.prepni(1);
+                else
+                    camera_script.prepni(0);
+            }
+      
             controls();
             //mozem_pohyb=rotuj_na_smer();
             controller.Move(pohyb*3.0f*Time.deltaTime);
@@ -150,12 +158,13 @@ public class player_main : MonoBehaviour
 
         controls_normal();
         controls_gun();
+        otazka_stav();
         
     }
 
     void controls_gun()
     {
-        if(mier)
+        if(mier && can_mier)
         {
 
 
@@ -240,6 +249,54 @@ public class player_main : MonoBehaviour
        // controller.collider.enabled=v;
         
         
+    }
+
+    void otazka_stav()
+    {
+        //if otazka
+        if(Input.GetKeyDown("v"))
+        {
+            can_mier=false;
+            mier=false;
+
+            camera_script.prepni(3);
+            animator.SetInteger("status",999);       
+
+            zbran_model.enabled=false;
+            tablet_model.enabled=true;
+
+
+            Vector3 ruka_pos=new Vector3(-0.00084f,0.00053f,-0.00126f);
+            Vector3 ruka_rot=new Vector3(4f,117.2f,79.1f);
+        
+            
+            ruka_ik.localPosition=ruka_pos;
+            ruka_ik.localEulerAngles=ruka_rot;
+           
+
+           
+        }
+        
+        if(Input.GetKeyDown("b"))
+        {
+            can_mier=true;
+            mier=false;
+
+            camera_script.prepni(0);
+            animator.SetInteger("status",888);       
+
+            zbran_model.enabled=true;
+            tablet_model.enabled=false;
+
+
+            Vector3 ruka_pos=new Vector3(0.0f,0.00065f,1e-05f);
+            Vector3 ruka_rot=new Vector3(4.58f,135.47f,135.47f);
+
+
+            ruka_ik.localPosition=ruka_pos;
+            ruka_ik.localEulerAngles=ruka_rot;
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)
