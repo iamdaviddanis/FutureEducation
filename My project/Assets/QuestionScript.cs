@@ -502,6 +502,7 @@ public class QuestionScript : MonoBehaviour
 
     void Update()
     {
+        Debug.Log("ODPOVEDAL "+odpovedal);
         if(odpovedal==-1)
         {
            

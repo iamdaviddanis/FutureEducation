@@ -30,7 +30,7 @@ public class player_main : MonoBehaviour
     private float bone_rot_cover=0.0f;
 
 
-    public int ammo=100;
+    public int ammo=100000;
     private bool can_mier=true;
 
     public GameObject zbran_model;
