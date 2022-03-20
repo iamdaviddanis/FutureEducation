@@ -15,6 +15,7 @@ public class zbrane_switch : MonoBehaviour
  
     void Update()
     {
+        
         int prev_selected = selected;
 
         if(Input.GetAxis("Mouse ScrollWheel") > 0f)

@@ -33,7 +33,7 @@ public class player_main : MonoBehaviour
     public int ammo=100;
     private bool can_mier=true;
 
-    public MeshRenderer zbran_model;
+    public GameObject zbran_model;
     public MeshRenderer tablet_model;
 
     
@@ -159,6 +159,8 @@ public class player_main : MonoBehaviour
         controls_normal();
         controls_gun();
         otazka_stav();
+
+       
         
     }
 
@@ -251,10 +253,10 @@ public class player_main : MonoBehaviour
         
     }
 
-    void otazka_stav()
+    public void set_stav(int stav_i)
     {
-        //if otazka
-        if(Input.GetKeyDown("v"))
+        
+        if(stav_i == 0)
         {
             can_mier=false;
             mier=false;
@@ -262,7 +264,52 @@ public class player_main : MonoBehaviour
             camera_script.prepni(3);
             animator.SetInteger("status",999);       
 
-            zbran_model.enabled=false;
+            zbran_model.SetActive(false);
+            tablet_model.enabled=true;
+
+
+            Vector3 ruka_pos=new Vector3(-0.00084f,0.00053f,-0.00126f);
+            Vector3 ruka_rot=new Vector3(4f,117.2f,79.1f);
+        
+            
+            ruka_ik.localPosition=ruka_pos;
+            ruka_ik.localEulerAngles=ruka_rot;
+        }
+        else
+        {
+            can_mier=true;
+            mier=false;
+
+            camera_script.prepni(0);
+            animator.SetInteger("status",888);       
+
+            zbran_model.SetActive(true);
+            tablet_model.enabled=false;
+
+
+            Vector3 ruka_pos=new Vector3(0.0f,0.00065f,1e-05f);
+            Vector3 ruka_rot=new Vector3(4.58f,135.47f,135.47f);
+
+
+            ruka_ik.localPosition=ruka_pos;
+            ruka_ik.localEulerAngles=ruka_rot;
+        }
+        
+    }
+
+
+    void otazka_stav()
+    {
+        //if otazka
+       /* if(Input.GetKeyDown("v"))
+        {
+            can_mier=false;
+            mier=false;
+
+            camera_script.prepni(3);
+            animator.SetInteger("status",999);       
+
+            zbran_model.SetActive(false);
             tablet_model.enabled=true;
 
 
@@ -285,7 +332,7 @@ public class player_main : MonoBehaviour
             camera_script.prepni(0);
             animator.SetInteger("status",888);       
 
-            zbran_model.enabled=true;
+            zbran_model.SetActive(true);
             tablet_model.enabled=false;
 
 
@@ -295,7 +342,7 @@ public class player_main : MonoBehaviour
 
             ruka_ik.localPosition=ruka_pos;
             ruka_ik.localEulerAngles=ruka_rot;
-        }
+        }*/
 
     }
 

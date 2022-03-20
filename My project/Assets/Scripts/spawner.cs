@@ -35,15 +35,42 @@ public class spawner : MonoBehaviour
         player_script=player.GetComponent<player_main>();
     }
 
+    private bool xd=true;
+    private bool o_r=true;
+    private float cas=0.0f;
+
     void Update()
     {
+         
         int odpoved=otazky_script.get_odpoved();
-        //Debug.Log(odpoved);
+        
+        if(odpoved == -1 && otazky_script.prisla_otazka)
+        {
+            if(xd)
+            {
+                player_script.set_stav(0);
+                
+                xd=false;  
+            }
+            else if(o_r)
+            {
+                if(cas > 1)
+                {
+                    otazky_script.render_otazka();
+                    cas=0.0f;
+                    o_r=false;
+                }
+                cas += Time.deltaTime;
+            }
+
+        }
         
         if(odpoved >=0)
         {
             if(can_spawn)
             {
+                player_script.set_stav(1);
+
                 for(int i=0;i<pocet;i++)
                 {
                     float random_x=Random.Range(60.0f,80.0f);
@@ -84,6 +111,9 @@ public class spawner : MonoBehaviour
             if(can_spawn)
             {
                 otazky_script.reset();
+                xd=true;
+                o_r=true;
+
                 Debug.Log("RESET");
             }
                 

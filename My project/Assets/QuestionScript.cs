@@ -37,6 +37,8 @@ public class QuestionScript : MonoBehaviour
 
     //neche sa  mi to studovat -1 nie 0 nespravne 1 sprave
     private short odpovedal=-1;
+    public bool prisla_otazka=false;
+    
    
 
     // Start is called before the first frame update
@@ -62,7 +64,6 @@ public class QuestionScript : MonoBehaviour
 
     void OdpovedStatus(int A, int B, int C, int D,string odpoved)
     {
-        
         {
 
             int good = 0;
@@ -268,6 +269,17 @@ public class QuestionScript : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    public void render_otazka()
+    {
+        Definition.enabled = false;  
+        loadData();
+        counter++;
+        Count_correct = 0;
+        timer = 0;
+        ImageText.enabled = false;
+    }
+
     void Update()
     {
         if(odpovedal==-1)
@@ -296,20 +308,23 @@ public class QuestionScript : MonoBehaviour
             if ( timer > 10)
             {
                 
-                Definition.enabled = false;
-              
-             
+                prisla_otazka=true;
+
+                /*Definition.enabled = false;
 
             
                 loadData();
                 counter++;
                 Count_correct = 0;
                 timer = 0;
-                ImageText.enabled = false;
-                
-       
+                ImageText.enabled = false;*/
+
             }
             
+        }
+        else
+        {
+            prisla_otazka=false;
         }
     }
        

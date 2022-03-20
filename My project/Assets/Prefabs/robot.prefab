@@ -1647,7 +1647,7 @@ MonoBehaviour:
   hp: 100
   cross_hair: {fileID: 2800000, guid: fdfac46505e9ca143b55f9e6f8e47e29, type: 3}
   ammo: 100
-  zbran_model: {fileID: 6338162939448839604}
+  zbran_model: {fileID: 746968257620585054}
   tablet_model: {fileID: 6338162939912091625}
 --- !u!114 &4626384552936229660
 MonoBehaviour:
@@ -3099,11 +3099,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 964fc822343311149adb0f414ba54cfc, type: 3}
---- !u!23 &6338162939448839604 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 964fc822343311149adb0f414ba54cfc, type: 3}
-  m_PrefabInstance: {fileID: 4626384552209043760}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5169711535932258011 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 964fc822343311149adb0f414ba54cfc, type: 3}

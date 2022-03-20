@@ -60,6 +60,7 @@
      <Compile Include="Assets\Scripts\player.cs" />
      <Compile Include="Assets\HealthBarScript.cs" />
      <Compile Include="Assets\Scripts\enemy_main.cs" />
+     <Compile Include="Assets\Scripts\enemy_dron.cs" />
      <Compile Include="Assets\Minimap.cs" />
      <Compile Include="Assets\EnemyAiTutorial.cs" />
      <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CreateSinShapedLineStrip.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\AmmoBox.cs" />
      <Compile Include="Assets\Scripts\spawner.cs" />
      <Compile Include="Assets\Scripts\Dron.cs" />
+     <Compile Include="Assets\Scripts\zbrane_switch.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\VolumetricLines\BuiltInRenderPipeline\Shaders\_LineStripShader.cginc" />
@@ -95,7 +97,6 @@
      <None Include="Assets\VolumetricLines\BuiltInRenderPipeline\Shaders\LineStrip-TextureAdditive.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
-     <None Include="Assets\sci-fi-weapons\README.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Fonts &amp; Materials\eina\License.txt" />
