@@ -212,13 +212,13 @@ public class QuestionScript : MonoBehaviour
     public void reset()
     {
         
-        Definition.enabled = false;
-   
-        AnswerStatus.enabled = false;
-
-
         odpovedal=-1;
         QuestionMenu.SetActive(true);
+
+
+         Definition.enabled = false;
+   
+        AnswerStatus.enabled = false;
     }
 
   
@@ -502,7 +502,7 @@ public class QuestionScript : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("ODPOVEDAL "+odpovedal);
+        //Debug.Log("ODPOVEDAL "+odpovedal);
         if(odpovedal==-1)
         {
            

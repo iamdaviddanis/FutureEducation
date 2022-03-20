@@ -72,7 +72,7 @@ public class spawner : MonoBehaviour
             {
                 player_script.set_stav(1);
 
-                for(int i=0;i<pocet;i++)
+                for(int i=0;i<1;i++)
                 {
                     float random_x=Random.Range(60.0f,80.0f);
                     float random_z=Random.Range(-50.0f,50.0f);
@@ -82,20 +82,21 @@ public class spawner : MonoBehaviour
                     GameObject enemy_robot=GameObject.Instantiate(enemy,pos,transform.rotation) as GameObject;
                     enemy_robot.GetComponent<enemy_main>().set_target(budova);
                 }
-                enemies = GameObject.FindGameObjectsWithTag("enemy");
+                enemies = GameObject.FindGameObjectsWithTag("boha");
                 can_spawn=false;
                 if(odpoved == 0)
                     pocet+=2;
             }
             reset();
         }
-
+        
       
     }
 
 
     void reset()
     {
+
         if(enemies !=null)
         {
             foreach(GameObject e in enemies)
@@ -111,11 +112,12 @@ public class spawner : MonoBehaviour
             }
             if(can_spawn)
             {
+                 Debug.Log("PCIE KRAVE RESET");
                 otazky_script.reset();
                 xd=true;
                 o_r=true;
 
-                Debug.Log("RESET");
+               
             }
                 
         }  
