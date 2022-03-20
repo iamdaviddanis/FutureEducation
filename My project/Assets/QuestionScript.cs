@@ -28,13 +28,13 @@ public class QuestionScript : MonoBehaviour
     public static int counter;
     DatabaseReference reference;
     public static bool isPaused;
-    public GameObject QuestionMenu;
-    public Text Load, LoadObrazok, AnswerA,  AnswerB, AnswerC, AnswerD, AnswerAObrazok, AnswerBObrazok, AnswerCObrazok, AnswerDObrazok, AnswerStatus, Score, Number_correct, count_question, Definition, ImageText;
+    public GameObject QuestionMenu,EndMenu;
+    public Text Load, LoadObrazok, AnswerA,  AnswerB, AnswerC, AnswerD, AnswerAObrazok, AnswerBObrazok, AnswerCObrazok, AnswerDObrazok, AnswerStatus, Score, Score2, Number_correct, count_question, Definition, ImageText;
     public String CheckAnswerA, CheckAnswerB, CheckAnswerC, CheckAnswerD, QuestionCount, odpoved;
     public Text Spravne, Nespravne;
     public int nespravneCislo = 0;
     public GameObject Green, Green2, Green3, Green4, Red, Red2, Red3, Red4,Green5, Green6, Green7, Green8, Red5, Red6, Red7, Red8;
-    public Sprite GreenRectangle, RedRectangle;
+    public Sprite GreenRectangle, RedRectangle,UISprite;
 
     public Button AnswerAbtn, AnswerBbtn, AnswerCbtn, AnswerDbtn, AnswerAbtnObrazok, AnswerBbtnObrazok, AnswerCbtnObrazok, AnswerDbtnObrazok;
 
@@ -49,36 +49,8 @@ public class QuestionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-     
-        Load.gameObject.SetActive(false);
-        QuestionTextImage.gameObject.SetActive(false);
-        LoadObrazok.gameObject.SetActive(false);
-        QuestionImage.gameObject.SetActive(false);
-        Green.SetActive(false);
-        Green2.SetActive(false);
-        Green3.SetActive(false);
-        Green4.SetActive(false);
-        Red.SetActive(false);
-        Red4.SetActive(false);
-        Red2.SetActive(false);
-        Red3.SetActive(false);
-        Green5.SetActive(false);
-        Green6.SetActive(false);
-        Green7.SetActive(false);
-        Green8.SetActive(false);
-        Red5.SetActive(false);
-        Red6.SetActive(false);
-        Red7.SetActive(false);
-        Red8.SetActive(false);
-        AnswerAbtn.gameObject.SetActive(false);
-        AnswerBbtn.gameObject.SetActive(false);
-        AnswerCbtn.gameObject.SetActive(false);
-        AnswerDbtn.gameObject.SetActive(false);
-
-        AnswerAbtnObrazok.gameObject.SetActive(false);
-        AnswerBbtnObrazok.gameObject.SetActive(false);
-        AnswerCbtnObrazok.gameObject.SetActive(false);
-        AnswerDbtnObrazok.gameObject.SetActive(false);
+        EndMenu.SetActive(false);
+        refesh();
         AnswerAbtn.onClick.AddListener(() => ButtonClicked(1));
         AnswerBbtn.onClick.AddListener(() => ButtonClicked(2));
         AnswerCbtn.onClick.AddListener(() => ButtonClicked(3));
@@ -213,12 +185,19 @@ public class QuestionScript : MonoBehaviour
     {
         
         odpovedal=-1;
-        QuestionMenu.SetActive(true);
+        refesh();
+
+        if (counter.ToString()== QuestionCount) {
+            Score2.text = scoreCounter.ToString();
+            EndMenu.SetActive(true);
+
+            odpovedal = 0;
+        }
 
 
-         Definition.enabled = false;
+        /* Definition.enabled = false;
    
-        AnswerStatus.enabled = false;
+        AnswerStatus.enabled = false;*/
     }
 
   
@@ -406,9 +385,8 @@ public class QuestionScript : MonoBehaviour
 
         
         StartCoroutine(ResumeAfterNSeconds(3.0f));
-        //
 
-
+  
 
     }
 
@@ -454,7 +432,7 @@ public class QuestionScript : MonoBehaviour
 
         if (e.Snapshot.Child("image").Child((counter - 1).ToString()).Exists)
         {
-
+            rawImage.gameObject.SetActive(true);
             LoadObrazok.gameObject.SetActive(true);
             QuestionImage.gameObject.SetActive(true);
 
@@ -469,6 +447,7 @@ public class QuestionScript : MonoBehaviour
             StartCoroutine(LoadImage("https://firebasestorage.googleapis.com/v0/b/last-city-8afa4.appspot.com/o/images%2F" + e.Snapshot.Child("image").Child((counter - 1).ToString()).GetValue(true).ToString() + "?alt=media"));
         }
         else {
+            rawImage.gameObject.SetActive(false);
             Load.gameObject.SetActive(true);
             QuestionTextImage.gameObject.SetActive(true);
             AnswerAbtn.gameObject.SetActive(true);
@@ -498,6 +477,49 @@ public class QuestionScript : MonoBehaviour
         Count_correct = 0;
         timer = 0;
         ImageText.enabled = false;
+    }
+
+    public void refesh() {
+
+        AnswerAbtn.GetComponent<Button>().image.sprite = UISprite;
+        AnswerBbtn.GetComponent<Button>().image.sprite = UISprite;
+        AnswerCbtn.GetComponent<Button>().image.sprite = UISprite;
+        AnswerDbtn.GetComponent<Button>().image.sprite = UISprite;
+        AnswerAbtnObrazok.GetComponent<Button>().image.sprite = UISprite;
+        AnswerBbtnObrazok.GetComponent<Button>().image.sprite = UISprite;
+        AnswerCbtnObrazok.GetComponent<Button>().image.sprite = UISprite;
+        AnswerDbtnObrazok.GetComponent<Button>().image.sprite = UISprite;
+        Load.gameObject.SetActive(false);
+        QuestionTextImage.gameObject.SetActive(false);
+        LoadObrazok.gameObject.SetActive(false);
+        QuestionImage.gameObject.SetActive(false);
+        Green.SetActive(false);
+        Green2.SetActive(false);
+        Green3.SetActive(false);
+        Green4.SetActive(false);
+        Red.SetActive(false);
+        Red4.SetActive(false);
+        Red2.SetActive(false);
+        Red3.SetActive(false);
+        Green5.SetActive(false);
+        Green6.SetActive(false);
+        Green7.SetActive(false);
+        Green8.SetActive(false);
+        Red5.SetActive(false);
+        Red6.SetActive(false);
+        Red7.SetActive(false);
+        Red8.SetActive(false);
+        AnswerAbtn.gameObject.SetActive(false);
+        AnswerBbtn.gameObject.SetActive(false);
+        AnswerCbtn.gameObject.SetActive(false);
+        AnswerDbtn.gameObject.SetActive(false);
+
+        AnswerAbtnObrazok.gameObject.SetActive(false);
+        AnswerBbtnObrazok.gameObject.SetActive(false);
+        AnswerCbtnObrazok.gameObject.SetActive(false);
+        AnswerDbtnObrazok.gameObject.SetActive(false);
+
+
     }
 
     void Update()
@@ -535,7 +557,7 @@ public class QuestionScript : MonoBehaviour
             timer += Time.deltaTime;
 
         
-            if ( timer > 10)
+            if ( timer > 5)
             {
                 
                 prisla_otazka=true;

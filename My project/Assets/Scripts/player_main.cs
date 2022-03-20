@@ -30,7 +30,7 @@ public class player_main : MonoBehaviour
     private float bone_rot_cover=0.0f;
 
 
-    public int ammo=100000;
+    public int ammo=789;
     private bool can_mier=true;
 
     public GameObject zbran_model;
@@ -41,15 +41,15 @@ public class player_main : MonoBehaviour
   
     void OnGUI()
     {
-        GUI.Label(new Rect(5,0,80,20),"HP " + hp);
-        GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
+      //  GUI.Label(new Rect(5,0,80,20),"HP " + hp);
+        //GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
         if(!zije)
         {
              GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
         }
         if(mier)
             GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
-
+      
 
 
     }
