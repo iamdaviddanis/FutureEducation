@@ -40,7 +40,7 @@ public class zbran : MonoBehaviour
         {
             if(Time.time > cas)
             {
-                cas=Time.time+0.5f;
+                cas=Time.time+speed_rate;
                 strielaj();
                 player_script.minus_ammo(1);
             }

@@ -22,10 +22,10 @@ public class AmmoBox : MonoBehaviour
     void Update()
     { 
         main.angularVelocity = Vector3.zero;
-        if(hit)
+       /* if(hit)
         {
             rotuj();
-        }
+        }*/
     }
 
     void rotuj()

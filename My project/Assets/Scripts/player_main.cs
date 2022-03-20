@@ -301,10 +301,17 @@ public class player_main : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+          //Debug.Log(collision.gameObject.name);
           if (collision.gameObject.tag == "drop")
           {
               ammo+=10;
               GameObject.Destroy(collision.gameObject);
+
+              Debug.Log("OK");
+          }
+          if(collision.gameObject.name == "shot_rifle_prefab(Clone)")
+          {
+                hit(10);
           }
     }
 

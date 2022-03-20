@@ -9,6 +9,7 @@ public class spawner : MonoBehaviour
     public GameObject player;
     public Transform budova;
 
+
     private QuestionScript otazky_script;
     private player_main player_script;
 
