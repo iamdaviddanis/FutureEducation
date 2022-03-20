@@ -48,6 +48,7 @@ public class spawner : MonoBehaviour
         {
             if(xd)
             {
+                player_script.set_stav(1);
                 player_script.set_stav(0);
                 
                 xd=false;  

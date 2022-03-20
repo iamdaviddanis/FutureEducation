@@ -66,6 +66,7 @@
      <Compile Include="Assets\VolumetricLines\BuiltInRenderPipeline\ExampleScenes\ExampleScripts\CreateSinShapedLineStrip.cs" />
      <Compile Include="Assets\QuestionScript.cs" />
      <Compile Include="Assets\AudioManager.cs" />
+     <Compile Include="Assets\tablet_zobraz.cs" />
      <Compile Include="Assets\AmmoNumber.cs" />
      <Compile Include="Assets\VolumetricLines\Scripts\VolumetricLineBehavior.cs" />
      <Compile Include="Assets\MainMenu.cs" />
