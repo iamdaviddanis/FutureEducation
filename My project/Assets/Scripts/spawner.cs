@@ -72,7 +72,7 @@ public class spawner : MonoBehaviour
             {
                 player_script.set_stav(1);
 
-                for(int i=0;i<1;i++)
+                for(int i=0;i<pocet;i++)
                 {
                     float random_x=Random.Range(60.0f,80.0f);
                     float random_z=Random.Range(-50.0f,50.0f);
