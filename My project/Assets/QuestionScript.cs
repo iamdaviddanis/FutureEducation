@@ -14,7 +14,8 @@ using System.Threading;
 
 public class QuestionScript : MonoBehaviour
 {
-    public RawImage rawImage;
+    public Color tempColor;
+    public RawImage rawImage,rawImageZoom;
     public Image QuestionImage, QuestionTextImage;
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -36,7 +37,7 @@ public class QuestionScript : MonoBehaviour
     public GameObject Green, Green2, Green3, Green4, Red, Red2, Red3, Red4,Green5, Green6, Green7, Green8, Red5, Red6, Red7, Red8;
     public Sprite GreenRectangle, RedRectangle,UISprite;
 
-    public Button AnswerAbtn, AnswerBbtn, AnswerCbtn, AnswerDbtn, AnswerAbtnObrazok, AnswerBbtnObrazok, AnswerCbtnObrazok, AnswerDbtnObrazok;
+    public Button AnswerAbtn, AnswerBbtn, AnswerCbtn, AnswerDbtn, AnswerAbtnObrazok, AnswerBbtnObrazok, AnswerCbtnObrazok, AnswerDbtnObrazok,btnZoomPlus, btnZoomMinus;
 
 
 
@@ -49,6 +50,13 @@ public class QuestionScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Button btn = btnZoomPlus.GetComponent<Button>();
+        btn.onClick.AddListener(TaskOnClick);
+        Button btn2 = btnZoomMinus.GetComponent<Button>();
+        btn2.onClick.AddListener(TaskOnClick2);
+        rawImageZoom.gameObject.SetActive(false);
+        btnZoomPlus.gameObject.SetActive(false);
+        btnZoomMinus.gameObject.SetActive(false);
         EndMenu.SetActive(false);
         refesh();
         AnswerAbtn.onClick.AddListener(() => ButtonClicked(1));
@@ -67,11 +75,30 @@ public class QuestionScript : MonoBehaviour
         QuestionMenu.SetActive(false);
         Definition.enabled = false;
         ImageText.enabled = false;
-        Debug.Log(MainMenu.code);
+        //Debug.Log(MainMenu.code);
 
        //  StartCoroutine(LoadImage("https://i.pinimg.com/236x/ab/9e/74/ab9e740d9285ac0122acb96a82621899.jpg")); //Fetch file from the link
 
 
+    }
+    void TaskOnClick()
+    {
+        rawImageZoom.gameObject.SetActive(true);
+        btnZoomPlus.gameObject.SetActive(false);
+        btnZoomMinus.gameObject.SetActive(true);
+
+        //Output this to console when Button1 or Button3 is clicked
+        Debug.Log("You have clicked the button!");
+    }
+
+    void TaskOnClick2()
+    {
+        rawImageZoom.gameObject.SetActive(false);
+        btnZoomPlus.gameObject.SetActive(true);
+        btnZoomMinus.gameObject.SetActive(false);
+
+        //Output this to console when Button1 or Button3 is clicked
+        Debug.Log("You have clicked the button!");
     }
 
     void OdpovedStatus(int A, int B, int C, int D,string odpoved)
@@ -225,7 +252,7 @@ public class QuestionScript : MonoBehaviour
     }
     IEnumerator LoadImage(string MediaUrl)
     {
-        
+        Debug.Log(MediaUrl);
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(MediaUrl); //Create a request
             yield return request.SendWebRequest(); //Wait for the request to complete
             if (request.isNetworkError || request.isHttpError)
@@ -235,8 +262,10 @@ public class QuestionScript : MonoBehaviour
             else
             {
                 rawImage.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
-                // setting the loaded image to our object
-            }
+            rawImage.gameObject.SetActive(true);
+               rawImageZoom.texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+            // setting the loaded image to our object
+        }
        
     }
 
@@ -408,7 +437,7 @@ public class QuestionScript : MonoBehaviour
 
     private void QuestionScript_ValueChanged(object sender, ValueChangedEventArgs e)
     {
-        rawImage.color = Color.black;
+     //  rawImage.color = Color.black;
         QuestionCount = e.Snapshot.Child("otazka").ChildrenCount.ToString();
         Load.text = e.Snapshot.Child("otazka").Child((counter-1).ToString()).GetValue(true).ToString();
         LoadObrazok.text = e.Snapshot.Child("otazka").Child((counter - 1).ToString()).GetValue(true).ToString();
@@ -442,17 +471,21 @@ public class QuestionScript : MonoBehaviour
             AnswerDbtnObrazok.gameObject.SetActive(true);
 
             ImageText.text = e.Snapshot.Child("image").Child((counter - 1).ToString()).GetValue(true).ToString();
-            ImageText.enabled = true;
+            //  ImageText.enabled = true;
+            btnZoomPlus.gameObject.SetActive(true);
             rawImage.color = Color.white;
+            rawImageZoom.color = Color.white;
             StartCoroutine(LoadImage("https://firebasestorage.googleapis.com/v0/b/last-city-8afa4.appspot.com/o/images%2F" + e.Snapshot.Child("image").Child((counter - 1).ToString()).GetValue(true).ToString() + "?alt=media"));
         }
         else {
+         //   rawImageZoom.gameObject.SetActive(false);
             rawImage.gameObject.SetActive(false);
             Load.gameObject.SetActive(true);
             QuestionTextImage.gameObject.SetActive(true);
             AnswerAbtn.gameObject.SetActive(true);
             AnswerBbtn.gameObject.SetActive(true);
             AnswerCbtn.gameObject.SetActive(true);
+            btnZoomPlus.gameObject.SetActive(false);
             AnswerDbtn.gameObject.SetActive(true);
         }
        
