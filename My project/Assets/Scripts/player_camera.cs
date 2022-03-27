@@ -51,6 +51,9 @@ public class player_camera : MonoBehaviour
         rotation=new Vector3();
         position=new Vector3();
         target_final=new Vector3();
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 
@@ -104,8 +107,7 @@ public class player_camera : MonoBehaviour
     
     void hlavna_camera()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-         Cursor.visible = false;
+       
         transform.parent=null;
 
         controls_hlavna();
@@ -161,8 +163,7 @@ public class player_camera : MonoBehaviour
 
     void camera_otazka()
     {
-        Cursor.lockState = CursorLockMode.None;
-         Cursor.visible = true;
+        
         transform.parent=target.transform;
 
        position.x=otazka_position_x;

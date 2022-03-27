@@ -5,12 +5,8 @@ using UnityEngine;
 public class AmmoBox : MonoBehaviour
 {
 
-
     public Rigidbody main;
-  
-
     private bool hit=false;
-
 
     void Start()
     {
@@ -53,4 +49,6 @@ public class AmmoBox : MonoBehaviour
         }
         
     }
+
+    
 }

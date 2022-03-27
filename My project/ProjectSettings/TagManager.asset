@@ -8,6 +8,7 @@ TagManager:
   - drop
   - enemy
   - boha
+  - enemy_dron
   layers:
   - Default
   - TransparentFX

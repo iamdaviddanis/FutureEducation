@@ -17,7 +17,7 @@ public class enemy_dron : MonoBehaviour
     private float za;
 
     Vector3 target_pos;
-    private int hp=3;
+    private int hp=1;
 
 
     public GameObject naboj;
@@ -73,15 +73,15 @@ public class enemy_dron : MonoBehaviour
                 GameObject.Destroy(ex,2f);
             }
         }
-        Debug.Log(hp);
+       
     }
 
 
     void gen_lokacia()
     {
       
-        float random_x=target_pos.x + Random.Range(-15.0f,15.0f);
-        float random_z=target_pos.z + Random.Range(-15.0f,15.0f);
+        float random_x=target_pos.x + Random.Range(-10.0f,10.0f);
+        float random_z=target_pos.z + Random.Range(-10.0f,10.0f);
         float random_y=Random.Range(10.0f,17.0f);
 
         go_to.x=random_x;
@@ -110,5 +110,15 @@ public class enemy_dron : MonoBehaviour
         }
        
         
+    }
+
+    public void set_target(Transform t)
+    {
+        target=t;
+    }
+
+    public bool zijes()
+    {
+        return zije;
     }
 }

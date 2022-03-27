@@ -121,8 +121,6 @@ public class player_main : MonoBehaviour
                  ragdoll(false);
             }
                
-
-             animator.SetInteger("status",0);      
             Vector3 pohyb=new Vector3(0.0f,0.0f,0.0f);
             if(controller.isGrounded)
                 pohyb.y=0;
@@ -141,20 +139,26 @@ public class player_main : MonoBehaviour
             //mozem_pohyb=rotuj_na_smer();
             controller.Move(pohyb*3.0f*Time.deltaTime);
         }
+
+        Debug.Log(animator.GetInteger("status"));
        
     }
 
     void controls()
     {
-        if(Input.GetMouseButton(1))
+        if(can_mier)
         {
-            mier=true;
+            if(Input.GetMouseButton(1))
+            {
+                mier=true;
+            }
+            else if(Input.GetMouseButtonUp(1))
+            {
+                 mier=false;
+                animator.SetInteger("status",0);  
+            }
         }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            mier=false;
-            animator.SetInteger("status",0);  
-        }
+       
 
         controls_normal();
         controls_gun();
@@ -191,16 +195,12 @@ public class player_main : MonoBehaviour
             {
                 animator.SetInteger("status",9); 
             }
-
-
-
-           
         }
     }
 
     void controls_normal()
     {
-        if(!mier)
+        if(!mier && can_mier)
         {
             animator.SetInteger("status",0);      
             hybe_sa=false;
@@ -281,7 +281,7 @@ public class player_main : MonoBehaviour
             mier=false;
 
             camera_script.prepni(0);
-            animator.SetInteger("status",888);       
+            animator.SetInteger("status",0);       
 
             zbran_model.SetActive(true);
             tablet_model.enabled=false;

@@ -14,9 +14,13 @@ public class Dron : MonoBehaviour
     private float za;
 
 
-    
+    GameObject box;
+
     void Start()
     {
+
+        box=transform.GetChild(0).gameObject;
+
         go_to=new Vector3(0,0,0);
         za=Random.Range(5,10);
         gen_lokacia();
@@ -42,9 +46,16 @@ public class Dron : MonoBehaviour
 
     void gen_lokacia()
     {
-        float random_x=Random.Range(-150,150);
-        float random_z=Random.Range(-150.0f,150.0f);
-        float random_y=Random.Range(10.0f,50.0f);
+        float random_x=Random.Range(32,150);
+        float random_z=Random.Range(15.0f,-20.0f);
+        float random_y=Random.Range(5.0f,15.0f);
+
+        if(box.GetComponent<AmmoBox>().get_status())
+        {
+             random_x=1000;
+             random_z=1000;
+        }
+        
 
         go_to.x=random_x;
         go_to.y=random_y;
