@@ -9,7 +9,7 @@ public class player_main : MonoBehaviour
     public Transform bone;
     public Transform ruka_ik;
     private Budova budova;
-   
+    private QuestionScript question_script;
     public GameObject camera;
     private player_camera camera_script;
 
@@ -23,7 +23,7 @@ public class player_main : MonoBehaviour
 
     public int hp=100;
     
-    private bool zije=true;
+    public bool zije=true;
 
     public Texture2D cross_hair;
 
@@ -47,7 +47,14 @@ public class player_main : MonoBehaviour
         //GUI.Label(new Rect(105,0,80,20),"NABOJE " + ammo);
         if(!zije)
         {
-             GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
+            question_script.Score2.text = question_script.scoreCounter.ToString();
+            question_script.EndMenu.SetActive(true);
+
+            question_script.odpovedal = 0;
+            Time.timeScale = 0;
+            Cursor.visible = true;
+
+            //      GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
         }
         if(mier)
             GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
@@ -108,6 +115,7 @@ public class player_main : MonoBehaviour
 
     void Start()
     {
+        question_script = FindObjectOfType<QuestionScript>();
         camera_script = camera.GetComponent<player_camera>();
       
         ragdoll(true);
@@ -117,7 +125,7 @@ public class player_main : MonoBehaviour
     {
         if(zije)
         {
-            if(hp <=0 && budova.hp_budova <= 0)
+            if(hp <=0 /*|| budova.hp_budova <= 0*/)
             {
                  zije=false;
                  ragdoll(false);

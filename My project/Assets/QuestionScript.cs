@@ -25,7 +25,7 @@ public class QuestionScript : MonoBehaviour
     float timer2 = 0;
     public bool click = false;
     public double b = 60;
-    public static int scoreCounter;
+    public int scoreCounter = 0;
     public static int counter;
     DatabaseReference reference;
     public static bool isPaused;
@@ -36,13 +36,13 @@ public class QuestionScript : MonoBehaviour
     public int nespravneCislo = 0;
     public GameObject Green, Green2, Green3, Green4, Red, Red2, Red3, Red4,Green5, Green6, Green7, Green8, Red5, Red6, Red7, Red8;
     public Sprite GreenRectangle, RedRectangle,UISprite;
-
+    private player_main player_script;
     public Button AnswerAbtn, AnswerBbtn, AnswerCbtn, AnswerDbtn, AnswerAbtnObrazok, AnswerBbtnObrazok, AnswerCbtnObrazok, AnswerDbtnObrazok,btnZoomPlus, btnZoomMinus;
 
 
 
     //neche sa  mi to studovat -1 nie 0 nespravne 1 sprave
-    private short odpovedal=-1;
+    public short odpovedal=-1;
     public bool prisla_otazka=false;
     
    
@@ -576,12 +576,18 @@ public class QuestionScript : MonoBehaviour
             
             if (cntdnw < 0)
             {
-
-               
+                odpovedal = 0;
+                nespravneCislo++;
+                Nespravne.text = nespravneCislo.ToString();
+                Time.timeScale = 1;                //Resume
+                timer5 = 0;
+                QuestionMenu.SetActive(false);
                 Debug.Log("Completed");
             }
 
-              
+
+         
+            
             
 
 
