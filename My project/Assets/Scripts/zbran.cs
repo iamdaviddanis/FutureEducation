@@ -37,7 +37,7 @@ public class zbran : MonoBehaviour
         */
 
         //if(Input.GetMouseButton(0) && player_script.mierim() && player_script.mam_ammo())
-        if(Input.GetMouseButton(0) && player_script.mierim())
+        if(Input.GetMouseButton(0) && player_script.mierim() && player_script.mam_ammo())
         {
             if(Time.time > cas)
             {
@@ -53,7 +53,7 @@ public class zbran : MonoBehaviour
         Ray ray=camera.ScreenPointToRay(new Vector2(Screen.width/2,Screen.height/2));
         GameObject laser=GameObject.Instantiate(naboj,transform.position,transform.rotation) as GameObject;
         laser.GetComponent<ShotBehavior>().set_target(ray.direction);
-        GameObject.Destroy(laser,2f);
+        GameObject.Destroy(laser,5f);
 
     }
 }

@@ -72,8 +72,7 @@ public class player_camera : MonoBehaviour
 
     void sekundarna_camera()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-         Cursor.visible = false;
+     
 
         transform.parent=target.transform;
 

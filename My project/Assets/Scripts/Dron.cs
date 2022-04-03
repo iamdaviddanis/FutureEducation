@@ -50,11 +50,16 @@ public class Dron : MonoBehaviour
         float random_z=Random.Range(15.0f,-20.0f);
         float random_y=Random.Range(5.0f,15.0f);
 
-        if(box.GetComponent<AmmoBox>().get_status())
+
+        if(box !=null)
         {
-             random_x=1000;
-             random_z=1000;
+            if(box.GetComponent<AmmoBox>().get_status())
+            {
+                 random_x=1000;
+                random_z=1000;
+            }
         }
+        
         
 
         go_to.x=random_x;

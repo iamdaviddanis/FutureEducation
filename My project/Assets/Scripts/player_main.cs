@@ -8,7 +8,7 @@ public class player_main : MonoBehaviour
     public Animator animator;
     public Transform bone;
     public Transform ruka_ik;
-    private Budova budova;
+  
     private QuestionScript question_script;
     public GameObject camera;
     private player_camera camera_script;
@@ -21,7 +21,7 @@ public class player_main : MonoBehaviour
     private bool mier=false;
 
 
-    public int hp=100;
+    public int hp=10000;
     
     public bool zije=true;
 
@@ -37,9 +37,11 @@ public class player_main : MonoBehaviour
     public GameObject zbran_model;
     public MeshRenderer tablet_model;
     public GameObject budovaObject;
-
+    private bool coll_check=true;
 
   
+    public GameObject budova;
+    private Budova budova_script;
 
     void OnGUI()
     {
@@ -58,6 +60,7 @@ public class player_main : MonoBehaviour
         }
         if(mier)
             GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
+            //GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
       
 
 
@@ -65,7 +68,7 @@ public class player_main : MonoBehaviour
 
     void LateUpdate()
     {
-        if(mier)
+        if(mier && zije)
         {
             bone_rot+= Input.GetAxis("Mouse Y") * 2.0f;
 
@@ -117,6 +120,7 @@ public class player_main : MonoBehaviour
     {
         question_script = FindObjectOfType<QuestionScript>();
         camera_script = camera.GetComponent<player_camera>();
+        budova_script=budova.GetComponent<Budova>();
       
         ragdoll(true);
     }
@@ -125,10 +129,12 @@ public class player_main : MonoBehaviour
     {
         if(zije)
         {
-            if(hp <=0 /*|| budova.hp_budova <= 0*/)
+            coll_check=true;
+            if(hp <=0 || budova_script.hp_budova <= 0)
             {
                  zije=false;
                  ragdoll(false);
+                 hp=0;
             }
                
             Vector3 pohyb=new Vector3(0.0f,0.0f,0.0f);
@@ -149,8 +155,13 @@ public class player_main : MonoBehaviour
             //mozem_pohyb=rotuj_na_smer();
             controller.Move(pohyb*3.0f*Time.deltaTime);
         }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
 
-        Debug.Log(animator.GetInteger("status"));
+       // Debug.Log(animator.GetInteger("status"));
        
     }
 
@@ -158,7 +169,9 @@ public class player_main : MonoBehaviour
     {
         if(can_mier)
         {
-            if(Input.GetMouseButton(1))
+            mier=true;
+
+            /*if(Input.GetMouseButton(1))
             {
                 mier=true;
             }
@@ -166,7 +179,7 @@ public class player_main : MonoBehaviour
             {
                  mier=false;
                 animator.SetInteger("status",0);  
-            }
+            }*/
         }
        
 
@@ -355,30 +368,27 @@ public class player_main : MonoBehaviour
         }*/
 
     }
-
-    void OnCollisionEnter(Collision collision)
+   
+    void OnControllerColliderHit(ControllerColliderHit  collision)
     {
-          Debug.Log(collision.gameObject.name);
-          if (collision.gameObject.tag == "drop")
-          {
-              ammo+=10;
-              GameObject.Destroy(collision.gameObject);
-
-              Debug.Log("OK");
-          }
-          if(collision.gameObject.name == "shot_rifle_prefab(Clone)")
-          {
-                hit(10);
-          }
-     /*   if (collision.gameObject.name == "budova")
+        if(coll_check  && collision.gameObject != null )
         {
-            budova.hit_budova(10);
+            if (collision.gameObject.tag=="drop")
+            {
+                ammo+=100;
+                var kill=collision.gameObject;
+                Destroy(kill);
+                return;
+                
+            }
+            else if(collision.gameObject.name == "shot_rifle_prefab(Clone)")
+            {
+                    hit(10);
+                    
+            }
+            coll_check=false;
         }
-
-        if (collision.gameObject.name == "player")
-        {
-            hit(10);
-        }*/
+      
     }
 
 }

@@ -51,21 +51,20 @@ public class enemy_attack : StateMachineBehaviour
                 animator.SetInteger("status",stav); 
         }
 
-
-        player=GameObject.FindWithTag("player");
-        player_script = player.GetComponent<player_main>();
-        player_script.hit(5);
-        Debug.Log("HIT PLAYER");
-        
-
-        budova = GameObject.FindWithTag("budova");
-        budova_script = budova.GetComponent<Budova>();
-        budova_script.hit_budova(5);
-        Debug.Log("HIT Budova");
-
-
-
-
+        if(animator.GetBool("d_stav"))
+        {
+            budova = GameObject.FindWithTag("budova");
+            budova_script = budova.GetComponent<Budova>();
+            budova_script.hit_budova(5);
+            Debug.Log("HIT Budova");
+        }
+        else
+        {
+            player=GameObject.FindWithTag("player");
+            player_script = player.GetComponent<player_main>();
+            player_script.hit(5);
+            Debug.Log("HIT PLAYER");
+        }
     }
  
 

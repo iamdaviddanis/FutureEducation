@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 11489952}
   - component: {fileID: 11468384}
   - component: {fileID: 10825254}
-  - component: {fileID: -2568305442140228802}
   - component: {fileID: 2887378497923308381}
+  - component: {fileID: 5404222129386753182}
   m_Layer: 0
   m_Name: shot_prefab
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 136330}
   m_LocalRotation: {x: 0, y: 0.7071068, z: -0, w: -0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.006, y: -0.011, z: -0.026}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.0001}
   m_Children: []
   m_Father: {fileID: 0}
@@ -182,19 +182,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!65 &-2568305442140228802
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 136330}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 12.56, y: 7, z: 418.98}
-  m_Center: {x: 0, y: 0.64, z: 0}
 --- !u!54 &2887378497923308381
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -211,3 +198,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &5404222129386753182
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136330}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 28.5, y: 25, z: 924.3}
+  m_Center: {x: 0, y: 0, z: 25.000008}

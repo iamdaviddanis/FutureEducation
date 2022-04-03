@@ -16,7 +16,7 @@ public class spawner : MonoBehaviour
     private player_main player_script;
 
     private bool can_spawn=true;
-    private int pocet=2;
+    private int pocet=10;
     
 
 
@@ -87,9 +87,13 @@ public class spawner : MonoBehaviour
 
                     Vector3 pos=new Vector3(random_x,random_y,random_z);
                     GameObject enemy_robot=GameObject.Instantiate(enemy,pos,transform.rotation) as GameObject;
-                    enemy_robot.GetComponent<enemy_main>().set_target(budova);
+
+                    float random_z_budova=Random.Range(0,-15.0f);
+                    Transform budova_t=budova;
+                    budova_t.position = new Vector3(budova.position.x,budova.position.y,random_z_budova);
+                    enemy_robot.GetComponent<enemy_main>().set_target(budova_t);
                 }
-                enemies = GameObject.FindGameObjectsWithTag("boha");
+                enemies = GameObject.FindGameObjectsWithTag("enemy");
 
                 int dron_pocet=Random.Range(1,2);
                 for(int i=0;i<dron_pocet;i++)

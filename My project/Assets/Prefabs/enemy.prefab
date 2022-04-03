@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 777158765212578535}
   m_Layer: 0
   m_Name: enemy
-  m_TagString: boha
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

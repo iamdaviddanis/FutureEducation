@@ -1645,10 +1645,12 @@ MonoBehaviour:
   ruka_ik: {fileID: 4626384552776788908}
   camera: {fileID: 0}
   hp: 100
+  zije: 1
   cross_hair: {fileID: 2800000, guid: fdfac46505e9ca143b55f9e6f8e47e29, type: 3}
   ammo: 100
   zbran_model: {fileID: 746968257620585054}
   tablet_model: {fileID: 6338162939912091625}
+  budovaObject: {fileID: 0}
 --- !u!114 &4626384552936229660
 MonoBehaviour:
   m_ObjectHideFlags: 0

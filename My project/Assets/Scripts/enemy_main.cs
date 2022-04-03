@@ -22,6 +22,8 @@ public class enemy_main : MonoBehaviour
 
     private bool fresh=true;
 
+    
+
     public bool zijes()
     {
         if(zije==true && animator.GetBool("res") == true)
@@ -46,17 +48,28 @@ public class enemy_main : MonoBehaviour
         }
         
        // controller.collider.enabled=v;
-        
-        
     }
 
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == "shot_prefab(Clone)")
         {
-            //Debug.Log(collision.gameObject.name);
+           
             hit(10);
         }
+
+         if (collision.gameObject.tag == "enemy")
+         {
+             Physics.IgnoreCollision(collision.collider,GetComponent<Collider>());
+         }
+
+    }
+    void OnControllerColliderHit(ControllerColliderHit  collision)
+    {
+         if (collision.gameObject.tag == "enemy")
+         {
+             Physics.IgnoreCollision(collision.collider,GetComponent<Collider>());
+         }
     }
 
     void Start()
@@ -149,13 +162,13 @@ public class enemy_main : MonoBehaviour
             }
            
         }
-
-
     }
     
     bool rotuj_na_target()
     {
-        Vector3 smer=target.position-transform.position;
+        Vector3 target_xy=new Vector3(target.position.x,transform.position.y,target.position.z);
+        Vector3 smer=target_xy-transform.position;
+
         smer=Vector3.Normalize(smer);
 
         float uhol = Vector3.Angle(smer, transform.forward);
@@ -167,7 +180,6 @@ public class enemy_main : MonoBehaviour
             return true;
         }
         return false;
-
     }
 
     void hit(int vstup)
@@ -176,9 +188,11 @@ public class enemy_main : MonoBehaviour
         {
             animator.SetInteger("hp",hp-vstup); 
             animator.SetInteger("status",9); 
+            animator.SetBool("d_stav",false);
 
             player=GameObject.FindWithTag("player");
              set_target(player.transform);
+            
 
             
         }
