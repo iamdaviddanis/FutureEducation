@@ -7,7 +7,7 @@ public class AmmoNumber : MonoBehaviour
 {
     public Text AmmoText;
     player_main player;
-    int pom;
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,8 @@ public class AmmoNumber : MonoBehaviour
     {
 
         AmmoText.text = player.ammo.ToString();
-
+       
+      
 
     }
 }

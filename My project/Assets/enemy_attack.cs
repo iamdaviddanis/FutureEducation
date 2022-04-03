@@ -8,6 +8,8 @@ public class enemy_attack : StateMachineBehaviour
     public int stav;
     private GameObject player;
     private player_main player_script;
+    private Budova budova_script;
+    private GameObject budova;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     //override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     //{
@@ -20,7 +22,7 @@ public class enemy_attack : StateMachineBehaviour
     //    
     //}
 
-     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
+    //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         if(stav >=0)
@@ -49,12 +51,24 @@ public class enemy_attack : StateMachineBehaviour
                 animator.SetInteger("status",stav); 
         }
 
+
         player=GameObject.FindWithTag("player");
-        player_script=player.GetComponent<player_main>();
+        player_script = player.GetComponent<player_main>();
         player_script.hit(5);
         Debug.Log("HIT PLAYER");
-         
+        
+
+        budova = GameObject.FindWithTag("budova");
+        budova_script = budova.GetComponent<Budova>();
+        budova_script.hit_budova(5);
+        Debug.Log("HIT Budova");
+
+
+
+
     }
+ 
+
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

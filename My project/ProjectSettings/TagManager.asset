@@ -9,6 +9,7 @@ TagManager:
   - enemy
   - boha
   - enemy_dron
+  - budova
   layers:
   - Default
   - TransparentFX

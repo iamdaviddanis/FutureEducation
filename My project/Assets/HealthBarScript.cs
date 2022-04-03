@@ -9,11 +9,14 @@ public class HealthBarScript : MonoBehaviour
    // public float CurrentHealth;
     //private float MaxHealth = 100f;
     player_main player;
+    
     // Start is called before the first frame update
     void Start()
     {
         HealthBar = GetComponent<Image>();
+    
         player = FindObjectOfType<player_main>();
+       
     }
 
     // Update is called once per frame
@@ -22,5 +25,7 @@ public class HealthBarScript : MonoBehaviour
         //CurrentHealth = player.hp;
         if (HealthBar != null)
             HealthBar.fillAmount = player.hp / 100f;
+
+
     }
 }

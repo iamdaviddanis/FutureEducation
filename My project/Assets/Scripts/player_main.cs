@@ -8,8 +8,8 @@ public class player_main : MonoBehaviour
     public Animator animator;
     public Transform bone;
     public Transform ruka_ik;
-
-
+    private Budova budova;
+   
     public GameObject camera;
     private player_camera camera_script;
 
@@ -22,6 +22,7 @@ public class player_main : MonoBehaviour
 
 
     public int hp=100;
+    
     private bool zije=true;
 
     public Texture2D cross_hair;
@@ -30,15 +31,16 @@ public class player_main : MonoBehaviour
     private float bone_rot_cover=0.0f;
 
 
-    public int ammo=789;
+    public float ammo=1000;
     private bool can_mier=true;
 
     public GameObject zbran_model;
     public MeshRenderer tablet_model;
+    public GameObject budovaObject;
 
-    
-    
+
   
+
     void OnGUI()
     {
       //  GUI.Label(new Rect(5,0,80,20),"HP " + hp);
@@ -115,7 +117,7 @@ public class player_main : MonoBehaviour
     {
         if(zije)
         {
-            if(hp <=0)
+            if(hp <=0 && budova.hp_budova <= 0)
             {
                  zije=false;
                  ragdoll(false);
@@ -348,7 +350,7 @@ public class player_main : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-          //Debug.Log(collision.gameObject.name);
+          Debug.Log(collision.gameObject.name);
           if (collision.gameObject.tag == "drop")
           {
               ammo+=10;
@@ -360,6 +362,15 @@ public class player_main : MonoBehaviour
           {
                 hit(10);
           }
+     /*   if (collision.gameObject.name == "budova")
+        {
+            budova.hit_budova(10);
+        }
+
+        if (collision.gameObject.name == "player")
+        {
+            hit(10);
+        }*/
     }
 
 }
