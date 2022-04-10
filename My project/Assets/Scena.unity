@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3645217, g: 0.3525374, b: 0.3633738, a: 1}
+  m_IndirectSpecularColor: {r: 0.36452174, g: 0.35253733, b: 0.36337355, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3942,6 +3942,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: dym
       objectReference: {fileID: 0}
+    - target: {fileID: 7047776607232934721, guid: 67807e2ccc6eadf4b87240b73d153a45, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7047776607232934726, guid: 67807e2ccc6eadf4b87240b73d153a45, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5806,6 +5810,7 @@ MonoBehaviour:
   QuestionTextImage: {fileID: 460326063}
   click: 0
   b: 0
+  scoreCounter: 0
   QuestionMenu: {fileID: 2010095126}
   EndMenu: {fileID: 231222668}
   Load: {fileID: 183622759}
@@ -5863,6 +5868,7 @@ MonoBehaviour:
   AnswerDbtnObrazok: {fileID: 339196698}
   btnZoomPlus: {fileID: 1733000417}
   btnZoomMinus: {fileID: 15484252}
+  odpovedal: -1
   prisla_otazka: 0
 --- !u!1 &825937004
 GameObject:
@@ -8351,6 +8357,10 @@ PrefabInstance:
       propertyPath: ammo
       value: 1000
       objectReference: {fileID: 0}
+    - target: {fileID: 4626384552936229656, guid: 1fd927c8708415940a457f912cdbaf9c, type: 3}
+      propertyPath: budova
+      value: 
+      objectReference: {fileID: 1463661694}
     - target: {fileID: 4626384552936229656, guid: 1fd927c8708415940a457f912cdbaf9c, type: 3}
       propertyPath: camera
       value: 

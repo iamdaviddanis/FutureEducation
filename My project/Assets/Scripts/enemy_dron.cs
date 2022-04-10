@@ -17,7 +17,7 @@ public class enemy_dron : MonoBehaviour
     private float za;
 
     Vector3 target_pos;
-    private int hp=1;
+    private int hp=50;
 
 
     public GameObject naboj;
@@ -28,6 +28,8 @@ public class enemy_dron : MonoBehaviour
     private float cas;
 
     private bool zije=true;
+
+    public GameObject ohen;
     
     void Start()
     {
@@ -37,12 +39,20 @@ public class enemy_dron : MonoBehaviour
         go_to=new Vector3(0,0,0);
         za=Random.Range(5,10);
         gen_lokacia();
+
+
+       ohen.SetActive(false);
     }
   
     void Update()
     {
+         
         if(hp > 0)
         {
+            if(hp <=20)
+            {
+              ohen.SetActive(true); 
+            }
             target_pos=target.position;
             if (period > za)
             {
@@ -64,9 +74,10 @@ public class enemy_dron : MonoBehaviour
         else
         {
             main.isKinematic=false;
-
+           
             if(zije)
             {
+                 //ohen.Stop();
                 zije=false;
                 GameObject ex=GameObject.Instantiate(boom,transform.position,transform.rotation) as GameObject;
                 //ex.transform.SetParent(transform);
@@ -103,13 +114,16 @@ public class enemy_dron : MonoBehaviour
     {
         if(hp > 0)
         {
-            if (collision.gameObject.name == "shot_prefab(Clone)")
+           /* if (collision.gameObject.name == "shot_prefab(Clone)")
             {
                 hp--;
-            }
+            }*/
         }
-       
-        
+    }
+
+    public void hit(int vstup)
+    {
+        hp-=vstup;
     }
 
     public void set_target(Transform t)

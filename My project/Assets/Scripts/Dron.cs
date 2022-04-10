@@ -66,4 +66,9 @@ public class Dron : MonoBehaviour
         go_to.y=random_y;
         go_to.z=random_z;
     }
+
+    public void hit(int vstup)
+    {
+        
+    }
 }

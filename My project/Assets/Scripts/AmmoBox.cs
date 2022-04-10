@@ -6,7 +6,7 @@ public class AmmoBox : MonoBehaviour
 {
 
     public Rigidbody main;
-    private bool hit=false;
+    private bool hit_ma=false;
 
     void Start()
     {
@@ -32,12 +32,12 @@ public class AmmoBox : MonoBehaviour
 
     public bool get_status()
     {
-        return hit;
+        return hit_ma;
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "shot_prefab(Clone)" && !hit)
+       /* if (collision.gameObject.name == "shot_prefab(Clone)" && !hit)
         {
             hit=true;
             main.isKinematic=false;
@@ -46,9 +46,21 @@ public class AmmoBox : MonoBehaviour
            
             //GameObject.Destroy(this);
           
-        }
+        }*/
          
         
+    }
+
+    public void hit(int vstup)
+    {
+        if(!hit_ma)
+        {
+            hit_ma=true;
+            main.isKinematic=false;
+            main.velocity=Vector3.zero;
+            transform.SetParent(null);
+        }
+      
     }
 
     

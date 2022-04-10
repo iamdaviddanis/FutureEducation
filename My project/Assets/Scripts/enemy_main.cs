@@ -19,10 +19,7 @@ public class enemy_main : MonoBehaviour
     private GameObject player;
     private float gravity=-9.8f;
 
-
     private bool fresh=true;
-
-    
 
     public bool zijes()
     {
@@ -55,7 +52,7 @@ public class enemy_main : MonoBehaviour
         if (collision.gameObject.name == "shot_prefab(Clone)")
         {
            
-            hit(10);
+            //hit(10);
         }
 
          if (collision.gameObject.tag == "enemy")
@@ -182,7 +179,7 @@ public class enemy_main : MonoBehaviour
         return false;
     }
 
-    void hit(int vstup)
+    public void hit(int vstup)
     {
         if(zije)
         {
