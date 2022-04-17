@@ -17,7 +17,7 @@ public class enemy_dron : MonoBehaviour
     private float za;
 
     Vector3 target_pos;
-    private int hp=50;
+    private int hp=100;
 
 
     public GameObject naboj;
@@ -69,12 +69,10 @@ public class enemy_dron : MonoBehaviour
                 cas=Time.time+speed_rate;
                 strielaj();
             }
-
         }
         else
         {
-            main.isKinematic=false;
-           
+            main.isKinematic=false;   
             if(zije)
             {
                  //ohen.Stop();
@@ -84,7 +82,6 @@ public class enemy_dron : MonoBehaviour
                 GameObject.Destroy(ex,2f);
             }
         }
-       
     }
 
 
@@ -105,9 +102,10 @@ public class enemy_dron : MonoBehaviour
         target_pos.y+=0.5f;
         Vector3 smer = ( target_pos - zdroj.position ).normalized;
         Ray ray=new Ray(zdroj.position,smer);
-        GameObject laser=GameObject.Instantiate(naboj,transform.position,transform.rotation) as GameObject;
+        Quaternion rot=Quaternion.LookRotation(smer);
+        GameObject laser=GameObject.Instantiate(naboj,transform.position,rot) as GameObject;
         laser.GetComponent<ShotBehavior>().set_target(ray.direction);
-        GameObject.Destroy(laser,2f);
+        GameObject.Destroy(laser,4f);
     }
 
     void OnCollisionEnter(Collision collision)

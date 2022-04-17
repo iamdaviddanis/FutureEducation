@@ -43,6 +43,8 @@ public class player_main : MonoBehaviour
     public GameObject budova;
     private Budova budova_script;
 
+    private bool scope=false;
+
     void OnGUI()
     {
       //  GUI.Label(new Rect(5,0,80,20),"HP " + hp);
@@ -58,7 +60,7 @@ public class player_main : MonoBehaviour
 
             //      GUI.Label(new Rect(Screen.width/2,Screen.height/2,500,250),"RIP");
         }
-        if(mier)
+        if(mier && !scope)
             GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
             //GUI.Label(new Rect((Screen.width/2)-50,(Screen.height/2)-25,50,50),cross_hair);
       
@@ -94,6 +96,16 @@ public class player_main : MonoBehaviour
     }
 
 
+    public bool scope_b()
+    {
+        return scope;
+    }
+
+    public void set_scope(bool v)
+    {
+        scope=v;
+    }
+
     public void hit(int vstup)
     {
         hp-=vstup;
@@ -127,6 +139,7 @@ public class player_main : MonoBehaviour
 
     void Update()
     {
+       
         if(zije)
         {
             coll_check=true;
@@ -170,6 +183,14 @@ public class player_main : MonoBehaviour
         if(can_mier)
         {
             mier=true;
+
+            if(Input.GetMouseButtonDown(1))
+            {
+                if(scope)
+                    scope=false;
+                else
+                    scope=true;
+            }
 
             /*if(Input.GetMouseButton(1))
             {
@@ -381,7 +402,7 @@ public class player_main : MonoBehaviour
                 return;
                 
             }
-            else if(collision.gameObject.name == "shot_rifle_prefab(Clone)")
+            if(collision.gameObject.tag == "naboj")
             {
                     hit(10);
                     

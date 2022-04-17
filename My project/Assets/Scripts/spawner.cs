@@ -52,6 +52,7 @@ public class spawner : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            player_script.set_scope(false);
 
             if(xd)
             {

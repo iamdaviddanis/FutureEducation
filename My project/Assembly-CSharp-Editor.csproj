@@ -47,7 +47,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\IgniteCoders\Simple Water Shader\Info\Scripts\Editor\ReadmeEditor.cs" />
+     <Compile Include="Assets\JMO Assets\Cartoon FX Easy Editor\Editor\CFXEasyEditor.cs" />
+     <Compile Include="Assets\JMO Assets\WarFX\Editor\CFX_SpawnSystemEditor.cs" />
      <None Include="Assets\Firebase\Editor\FirebaseDatabase_version-8.6.2_manifest.txt" />
      <None Include="Assets\ExternalDependencyManager\Editor\external-dependency-manager_version-1.2.167_manifest.txt" />
      <None Include="Assets\Firebase\Editor\StorageDependencies.xml" />

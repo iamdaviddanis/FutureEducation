@@ -10,6 +10,7 @@ TagManager:
   - boha
   - enemy_dron
   - budova
+  - naboj
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - main robot
   - minimap
   - enemy
-  - 
+  - naboje
   - 
   - 
   - 
